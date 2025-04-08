@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Niesamowity Świat Pszczół: Cykl Życia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+      @font-face {
+        font-family: 'LucideIcons';
+        src: url(https://cdn.jsdelivr.net/npm/lucide-static@latest/font/Lucide.ttf) format('truetype');
+      }
+      .lucide {
+        font-family: 'LucideIcons';
+        font-size: 1.5rem; /* Adjust icon size */
+        line-height: 1;
+        display: inline-block;
+      }
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: #FFFBEB; /* Light yellow background */
+      }
+      .stage-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+      }
+      .stage-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      }
+      .modal {
+        display: none; /* Hidden by default */
+        position: fixed;
+        z-index: 50;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.6); /* Dim background */
+        align-items: center;
+        justify-content: center;
+      }
+      .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 600px;
+        border-radius: 1rem;
+        position: relative; /* For close button positioning */
+      }
+      .close-button {
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        color: #aaa;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      .close-button:hover,
+      .close-button:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      /* Honeycomb background pattern */
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23FBBF24' fill-opacity='0.1'%3E%3Cpath d='M0 38.59l2.83-2.83 1.41 1.41L1.41 40H0v-1.41zM0 1.4l2.83 2.83 1.41-1.41L1.41 0H0v1.41zM38.59 40l-2.83-2.83 1.41-1.41L40 38.59V40h-1.41zM40 1.41l-2.83 2.83-1.41-1.41L38.59 0H40v1.41zM20 18.6l2.83-2.83 1.41 1.41L21.41 20l2.83 2.83-1.41 1.41L20 21.41l-2.83 2.83-1.41-1.41L18.59 20l-2.83-2.83 1.41-1.41L20 18.59z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        z-index: -1; /* Place behind content */
+      }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div class="container mx-auto p-6 max-w-4xl">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-yellow-600 mb-4">
+                <span class="lucide mr-2">&#xe497;</span> Niesamowity Świat Pszczół!
+            </h1>
+            <p class="text-lg text-gray-700">Odkryjmy razem, jak rośnie pszczoła!</p>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+            <div class="bg-white p-6 rounded-xl shadow-lg stage-card" onclick="openModal('modal-egg')">
+                <h2 class="text-2xl font-bold text-yellow-700 mb-3 flex items-center">
+                    <span class="lucide mr-2 text-yellow-500">&#xe187;</span> Etap 1: Jajo
+                </h2>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Apis_mellifera_eggs.jpg/640px-Apis_mellifera_eggs.jpg" alt="Jaja pszczół w komórce plastra" class="w-full h-48 object-cover rounded-lg mb-4" onerror="this.onerror=null; this.src='https://placehold.co/640x480/FBBF24/FFFFFF?text=Jajo+Pszczo%C5%82y';">
+                <p class="text-gray-600">Wszystko zaczyna się od malutkiego jajeczka, które królowa pszczół składa w komórce plastra. Wygląda jak ziarenko ryżu!</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-lg stage-card" onclick="openModal('modal-larva')">
+                <h2 class="text-2xl font-bold text-yellow-700 mb-3 flex items-center">
+                     <span class="lucide mr-2 text-yellow-500">&#xe11b;</span> Etap 2: Larwa
+                </h2>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Apis_mellifera_larvae.jpg/640px-Apis_mellifera_larvae.jpg" alt="Larwy pszczół w komórkach plastra" class="w-full h-48 object-cover rounded-lg mb-4" onerror="this.onerror=null; this.src='https://placehold.co/640x480/FBBF24/FFFFFF?text=Larwa+Pszczo%C5%82y';">
+                <p class="text-gray-600">Z jaja wykluwa się mała, biała larwa. Wygląda trochę jak robaczek. Pszczoły robotnice karmią ją specjalnym mleczkiem.</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-lg stage-card" onclick="openModal('modal-pupa')">
+                 <h2 class="text-2xl font-bold text-yellow-700 mb-3 flex items-center">
+                    <span class="lucide mr-2 text-yellow-500">&#xe4b1;</span> Etap 3: Poczwarka
+                </h2>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Apis_mellifera_pupa_lateral_view.JPG/640px-Apis_mellifera_pupa_lateral_view.JPG" alt="Poczwarka pszczoły" class="w-full h-48 object-cover rounded-lg mb-4" onerror="this.onerror=null; this.src='https://placehold.co/640x480/FBBF24/FFFFFF?text=Poczwarka+Pszczo%C5%82y';">
+                 <p class="text-gray-600">Larwa rośnie, a potem zamyka się w komórce wieczkiem. W środku zamienia się w poczwarkę. Zaczyna już przypominać pszczołę!</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-lg stage-card" onclick="openModal('modal-adult')">
+                 <h2 class="text-2xl font-bold text-yellow-700 mb-3 flex items-center">
+                    <span class="lucide mr-2 text-yellow-500">&#xe497;</span> Etap 4: Dorosła Pszczoła
+                </h2>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/European_honey_bee_extracts_nectar.jpg/640px-European_honey_bee_extracts_nectar.jpg" alt="Dorosła pszczoła na kwiecie" class="w-full h-48 object-cover rounded-lg mb-4" onerror="this.onerror=null; this.src='https://placehold.co/640x480/FBBF24/FFFFFF?text=Doros%C5%82a+Pszczo%C5%82a';">
+                <p class="text-gray-600">W końcu z komórki wychodzi dorosła pszczoła! Jest gotowa do pracy w ulu lub do zbierania nektaru z kwiatów.</p>
+            </div>
+        </div>
+
+        <section class="mt-12 bg-yellow-100 p-6 rounded-xl shadow-md">
+            <h2 class="text-3xl font-bold text-yellow-700 mb-4 text-center">
+                <span class="lucide mr-2">&#xe4f1;</span> Zobacz Film!
+            </h2>
+            <p class="text-center text-gray-700 mb-6">Obejrzyj krótki film, żeby dowiedzieć się jeszcze więcej o życiu pszczół.</p>
+            <div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden">
+                 <iframe
+                    src="https://www.youtube.com/embed/PX86gGgWY_Q?si=yv_pYk6v9r8_bXo7"
+                    title="YouTube video player - Bee Life Cycle Animation"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen
+                    class="w-full h-full">
+                 </iframe>
+                 <div class="w-full h-full bg-gray-200 flex items-center justify-center text-gray-500" style="display: none;" id="video-fallback">
+                    Nie można załadować filmu. Spróbuj odświeżyć stronę lub poszukaj "cykl życia pszczoły dla dzieci" na YouTube.
+                 </div>
+            </div>
+        </section>
+
+         <section class="mt-12 bg-amber-100 p-6 rounded-xl shadow-md">
+            <h2 class="text-3xl font-bold text-amber-800 mb-4 text-center">
+                <span class="lucide mr-2">&#xe2f2;</span> Czy wiesz, że...?
+            </h2>
+            <ul class="list-disc list-inside space-y-2 text-gray-700 text-lg">
+                <li>Pszczoły robotnice żyją tylko około 6 tygodni latem!</li>
+                <li>Królowa pszczół może złożyć nawet 2000 jaj dziennie!</li>
+                <li>Pszczoły tańczą, żeby powiedzieć innym pszczołom, gdzie znalazły pyszne kwiaty.</li>
+                <li>Bez pszczół nie mielibyśmy wielu owoców i warzyw!</li>
+            </ul>
+        </section>
+
+    </div>
+
+    <div id="modal-egg" class="modal" onclick="closeModal('modal-egg', event)">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal('modal-egg')">&times;</span>
+            <h3 class="text-2xl font-bold text-yellow-700 mb-3">Jajo Pszczoły</h3>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Apis_mellifera_eggs.jpg/640px-Apis_mellifera_eggs.jpg" alt="Jaja pszczół w komórce plastra" class="w-full h-64 object-cover rounded-lg mb-4" onerror="this.onerror=null; this.src='https://placehold.co/640x480/FBBF24/FFFFFF?text=Jajo+Pszczo%C5%82y';">
+            <p>Królowa matka składa po jednym jaju w każdej przygotowanej komórce plastra. Jajo jest bardzo małe, białe i podłużne. Po około 3 dniach wykluwa się z niego larwa.</p>
+        </div>
+    </div>
+
+    <div id="modal-larva" class="modal" onclick="closeModal('modal-larva', event)">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal('modal-larva')">&times;</span>
+            <h3 class="text-2xl font-bold text-yellow-700 mb-3">Larwa Pszczoły</h3>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Apis_mellifera_larvae.jpg/640px-Apis_mellifera_larvae.jpg" alt="Larwy pszczół w komórkach plastra" class="w-full h-64 object-cover rounded-lg mb-4" onerror="this.onerror=null; this.src='https://placehold.co/640x480/FBBF24/FFFFFF?text=Larwa+Pszczo%C5%82y';">
+            <p>Larwa nie ma nóg ani oczu, wygląda jak mały robaczek. Jest bardzo głodna! Pszczoły opiekunki (karmicielki) karmią ją specjalnym pokarmem - mleczkiem pszczelim, a potem mieszanką miodu i pyłku. Larwa rośnie bardzo szybko.</p>
+        </div>
+    </div>
+
+    <div id="modal-pupa" class="modal" onclick="closeModal('modal-pupa', event)">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal('modal-pupa')">&times;</span>
+            <h3 class="text-2xl font-bold text-yellow-700 mb-3">Poczwarka Pszczoły</h3>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Apis_mellifera_pupa_lateral_view.JPG/640px-Apis_mellifera_pupa_lateral_view.JPG" alt="Poczwarka pszczoły" class="w-full h-64 object-cover rounded-lg mb-4" onerror="this.onerror=null; this.src='https://placehold.co/640x480/FBBF24/FFFFFF?text=Poczwarka+Pszczo%C5%82y';">
+            <p>Gdy larwa jest już duża, pszczoły zamykają jej komórkę woskowym wieczkiem. W środku larwa przechodzi niesamowitą przemianę w poczwarkę. W tym czasie kształtują się jej oczy, nogi, skrzydła i inne części ciała dorosłej pszczoły. Nic nie je, tylko się zmienia.</p>
+        </div>
+    </div>
+
+    <div id="modal-adult" class="modal" onclick="closeModal('modal-adult', event)">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal('modal-adult')">&times;</span>
+            <h3 class="text-2xl font-bold text-yellow-700 mb-3">Dorosła Pszczoła</h3>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/European_honey_bee_extracts_nectar.jpg/640px-European_honey_bee_extracts_nectar.jpg" alt="Dorosła pszczoła na kwiecie" class="w-full h-64 object-cover rounded-lg mb-4" onerror="this.onerror=null; this.src='https://placehold.co/640x480/FBBF24/FFFFFF?text=Doros%C5%82a+Pszczo%C5%82a';">
+            <p>Po kilku lub kilkunastu dniach (zależy czy to robotnica, truteń czy królowa) poczwarka zamienia się w dorosłą pszczołę. Przegryza wieczko komórki i wychodzi na zewnątrz! Młoda pszczoła najpierw pracuje w ulu (np. sprząta, karmi larwy, buduje plaster), a dopiero później wylatuje zbierać nektar i pyłek z kwiatów.</p>
+        </div>
+    </div>
+
+    <script>
+        // Function to open a modal
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'flex'; // Use flex to center content
+            }
+        }
+
+        // Function to close a modal
+        function closeModal(modalId, event) {
+            // If the click event is provided, check if it occurred outside the modal content
+            if (event && event.target === document.getElementById(modalId)) {
+                document.getElementById(modalId).style.display = 'none';
+            }
+            // If no event is provided (clicked the close button), just close it
+            else if (!event) {
+                 document.getElementById(modalId).style.display = 'none';
+            }
+        }
+
+        // Handle iframe loading errors
+        const iframe = document.querySelector('iframe');
+        const fallback = document.getElementById('video-fallback');
+        if (iframe) {
+            iframe.onerror = function() {
+                iframe.style.display = 'none';
+                fallback.style.display = 'flex';
+            };
+            // Optional: Add a timeout in case 'onerror' doesn't fire reliably for all browsers/errors
+            setTimeout(() => {
+                // Check if iframe content is accessible (might be blocked by cross-origin policy)
+                // This is not a perfect check but can catch some loading issues.
+                try {
+                    // Attempt to access contentWindow; will throw error if blocked or not loaded
+                    if (!iframe.contentWindow || iframe.contentWindow.length === 0) {
+                         iframe.onerror(); // Trigger fallback logic
+                    }
+                } catch (e) {
+                     iframe.onerror(); // Trigger fallback logic if access is denied
+                }
+            }, 5000); // Wait 5 seconds
+        }
+
+    </script>
+
+</body>
+</html>
